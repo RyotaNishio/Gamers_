@@ -139,3 +139,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
     'http://localhost',
 ]
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8080',
+    'http:localhost'
+]
+SESSION_COOKIE_SECURE = True
+SECURE_HSTS_SECONDS = 60
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+CSRF_COOKIE_SECURE = True
+SECURE_HSTS_PRELOAD = True
