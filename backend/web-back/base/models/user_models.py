@@ -1,8 +1,6 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from django.db.models.signals import post_save
 from django.db import models
 from django.utils.crypto import get_random_string
-from django.dispatch import receiver
 import os
 
 
@@ -12,7 +10,7 @@ def create_id():
 
 def get_user_image_path(instance, filename):
     extends = filename.split('.')[-1]
-    return os.path.join('user', f"{instance.id}.{extends}")
+    return os.path.join('user', f"{instance.user.id}.{extends}")
 
 
 class UserManager(BaseUserManager):
@@ -27,7 +25,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, username, email, password):
+    def create_superuser(self, email, password):
         user = self.create_user(
             email=self.normalize_email(email),
             password=password,
