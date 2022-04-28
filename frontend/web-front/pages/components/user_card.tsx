@@ -1,0 +1,71 @@
+import {User} from "../type";
+
+export const UserCard = (props: {user: User}) => {
+    const { user } = props
+
+
+    return (
+        <>
+            <div className="grid col-span-1 rounded-lg bg-cyan-200 p-4 grid-rows-9 border-2 border-cyan-300 h-min">
+                <div className="row-span-6">
+                    <img src="http://localhost:8080/media/user/b81irCi7bD_mvR6h0S.JPG" alt=""
+                         className="my-3 mx-auto h-48 w-48 object-cover object-top rounded-full" />
+                        <p className="font-normal text-3xl text-center">{user.username}</p>
+                </div>
+                {user.birthday &&
+                  <div className="row-span-1 mb-2 flex mx-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-500" fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor"
+                         stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z"/>
+                    </svg>
+                    <p className="text-gray-500">{user.birthday}</p>
+                  </div>
+                }
+                <div className="row-span-1 flex mb-2">
+                        {/*<p>following:{user.following.count}</p>*/}
+                        {/*<p>followers:{user.followed_by.count}</p>*/}
+                </div>
+                {/*{% if user.pk == request.user.pk %}*/}
+                    <div className="row-span-1 flex mt-2 text-gray-700 rounded-full hover:bg-cyan-500 cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 ml-5" viewBox="0 0 20 20"
+                             fill="currentColor">
+                            <path
+                                d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+                        </svg>
+                        <p className="my-auto ml-1 text-xl">Edit</p>
+                    </div>
+                {/*{% else %}*/}
+                    <div className="row-span-1 flex mt-2 text-gray-700 rounded-full hover:bg-cyan-500 cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 ml-5" viewBox="0 0 20 20"
+                             fill="currentColor">
+                            <path
+                                d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
+                        </svg>
+                        {/*{% if user in request.user.following.all %}*/}
+                        <p className="my-auto ml-1 text-xl">Unfollow</p>
+                        {/*{% else %}*/}
+                        <p className="my-auto ml-1 text-xl">Follow</p>
+                        {/*{% endif %}*/}
+                    </div>
+                <a href="#">
+                    <div className="row-span-1 flex mt-2 text-gray-700 rounded-full hover:bg-cyan-500 cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 ml-5" viewBox="0 0 20 20"
+                             fill="currentColor">
+                            <path fill-rule="evenodd"
+                                  d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                        <p className="my-auto ml-1 text-xl">Message</p>
+                    </div>
+                </a>
+                {user.bio &&
+                <div className="row-span-1 mt-4 bg-cyan-100 rounded-lg p-2 border-2 border-dashed border-cyan-400">
+                    {user.bio}
+                </div>}
+            </div>
+        </>
+    )
+}

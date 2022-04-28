@@ -1,35 +1,28 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
+import {User} from "../type";
 
-
-export type User = {
-    id: number
-    name: string
-    username: string
-}
 
 const UserList: React.FC = () => {
     const [users, setUsers] = useState([])
-    const getUsers = async () => {
-        axios.get("https://jsonplaceholder.typicode.com/users")
+
+    useEffect(() => {
+        const apiUrl = 'http://localhost:8080/api/'
+        axios.get(`${apiUrl}users/`)
             .then(res => {
                 setUsers(res.data)
-            }).catch(error => {
-            for(let key of Object.keys(error)) {
-                console.log(key)
-                console.log(error[key])
-            }
-        })
-    }
+                console.log(res.data)
+            })
+    }, [setUsers])
 
     return (
         <>
-            <button className="btn bg-teal-400" onClick={() => {getUsers()}}>get Users</button>
             {users.map((user:User) => (
                 <div key={user.id}>
                     <p>{user.id}</p>
-                    <p>{user.name}</p>
                     <p>{user.username}</p>
+                    <p>{user.bio}</p>
+                    <img src="../images/l_e_others_500.png" alt=""/>
                 </div>
             ))}
         </>

@@ -7,4 +7,7 @@
     <orderEntry type="jdk" jdkName="Remote Python 3.10.4 Docker Compose (web-back at [/Users/sena/Desktop/Gamers_/docker-compose.yml])" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
+  <component name="TemplatesService">
+    <option name="TEMPLATE_CONFIGURATION" value="Django" />
+  </component>
 </module>

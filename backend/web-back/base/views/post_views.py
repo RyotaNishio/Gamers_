@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from ..serializers import PostSerializer, CommentSerializer
+from base.serializers import PostSerializer, CommentSerializer
 from ..models import Post, Comment
 
 

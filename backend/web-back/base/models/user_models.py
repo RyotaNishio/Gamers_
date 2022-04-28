@@ -10,7 +10,7 @@ def create_id():
 
 def get_user_image_path(instance, filename):
     extends = filename.split('.')[-1]
-    return os.path.join('user', f"{instance.user.id}.{extends}")
+    return os.path.join('user', f"{instance.id}.{extends}")
 
 
 class UserManager(BaseUserManager):
@@ -46,27 +46,23 @@ class User(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
     data_joined = models.DateTimeField(auto_now_add=True)
     following = models.ManyToManyField("self", blank=True, related_name="followed_by", symmetrical=False)
+    username = models.CharField(max_length=20)
+    bio = models.TextField(default='', blank=True, max_length=150)
+    birthday = models.DateField(blank=True, null=True)
+    img = models.ImageField(blank=True, null=True, upload_to=get_user_image_path,
+                            default='user/l_e_others_500.png')
 
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
 
-    REQUIRED_FIELDS = ['email']
+    REQUIRED_FIELDS = ['username', 'email']
 
     def __str__(self):
-        return self.email
+        return self.username
 
     def has_perm(self, perm, obj=None):
         return self.is_admin
 
     def has_module_perms(self, app_label):
         return self.is_admin
-
-
-class Profile(models.Model):
-    user = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)
-    username = models.CharField(max_length=20)
-    bio = models.TextField(default='', blank=True, max_length=150)
-    birthday = models.DateField(blank=True, null=True)
-    img = models.ImageField(blank=True, null=True, upload_to=get_user_image_path,
-                            default='user/l_e_others_500.png')

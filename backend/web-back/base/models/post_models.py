@@ -10,7 +10,7 @@ def get_post_image_path(instance, filename):
 
 class Post(models.Model):
     id = models.CharField(default=create_id, primary_key=True, max_length=10)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_posts")
     body = models.TextField(default='', blank=True, max_length=150)
     img = models.ImageField(blank=True, null=True, upload_to=get_post_image_path)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -20,7 +20,7 @@ class Post(models.Model):
 class Comment(models.Model):
     id = models.CharField(default=create_id, primary_key=True, max_length=10)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="post_comments")
     body = models.TextField(max_length=150)
     created_at = models.DateTimeField(auto_now_add=True)
     liked = models.ManyToManyField(User, related_name="favorited_by", blank=True)
